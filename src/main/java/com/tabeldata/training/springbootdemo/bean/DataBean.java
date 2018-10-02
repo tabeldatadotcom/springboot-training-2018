@@ -54,8 +54,6 @@ public class DataBean {
         this.bean = bean;
     }
     
-    
-
     @Override
     public String toString() {
         return String.format("{%s, %s, otherBean: { %s, %s }, %s}", 
