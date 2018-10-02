@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HaloController {
     
-    @GetMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(
+            path = "/", 
+            consumes = MediaType.APPLICATION_JSON_VALUE, 
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String halo(){
         return "{ \"message\" : \"Halo ini dari spring web mvc\"}";
     }
