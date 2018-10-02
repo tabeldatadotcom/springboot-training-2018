@@ -6,6 +6,8 @@
 package com.tabeldata.training.springbootdemo.controller;
 
 import com.tabeldata.training.springbootdemo.dto.RequestHalo;
+import com.tabeldata.training.springbootdemo.dto.ResponseHalo;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +25,14 @@ public class HaloController {
     
     @GetMapping(
             path = "/findByName")
-    public String halo(
+    public ResponseEntity<ResponseHalo> halo(
             @RequestParam(name = "nama", required = false) 
                     String param){
-        String format = String.format("{ \"message\": \"halo ini dari spring\", \"nama\" : \"%s\" }",
-                param);
-        return format;
+       if(param.trim().isEmpty()){
+           return ResponseEntity.noContent().build();
+       }
+       
+       return ResponseEntity.ok(new ResponseHalo(param, null));
     }
     
     @PostMapping(
