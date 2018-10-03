@@ -7,9 +7,8 @@ package com.tabeldata.training.springbootdemo.controller;
 
 import com.tabeldata.training.springbootdemo.dao.ProdukDao;
 import com.tabeldata.training.springbootdemo.entity.Produk;
-import org.apache.catalina.loader.ResourceEntry;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,19 +23,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/produk")
 public class ProdukController {
-    
+
     @Autowired
     private ProdukDao dao;
-    
+
     @GetMapping("/{kode}/findById")
-    public ResponseEntity<Produk> findById(@PathVariable( "kode") String id){
-        try{
+    public ResponseEntity<Produk> findById(@PathVariable("kode") String id) {
+        try {
             Produk produk = dao.findById(id);
             return ResponseEntity.ok(produk);
-            
-        } catch (EmptyResultDataAccessException erdae){
+
+        } catch (EmptyResultDataAccessException erdae) {
             return ResponseEntity.noContent().build();
         }
     }
     
+    @GetMapping("/list")
+    public List<Produk> findAll(){
+        return dao.findAll();
+    }
+
 }

@@ -8,6 +8,7 @@ package com.tabeldata.training.springbootdemo.dao;
 import com.tabeldata.training.springbootdemo.entity.Produk;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,12 +25,10 @@ import org.springframework.stereotype.Repository;
 public class ProdukDao {
     
     @Autowired
-    @Qualifier("dataSource")
-    private DataSource datasource;
+    private JdbcTemplate jdbcTemplate;
     
     public Produk findById(String id) throws EmptyResultDataAccessException{
         String query = "select id as kode_unique, kode, nama, harga, qty from produk where id = ?";
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
         Produk produk = jdbcTemplate.queryForObject(query, new RowMapper<Produk>(){
             @Override
             public Produk mapRow(ResultSet rs, int i) throws SQLException {
@@ -45,5 +44,20 @@ public class ProdukDao {
         return produk;
     }
    
+    public List<Produk> findAll(){
+        String query = "select id as kode_unique, kode, nama, harga, qty from produk";
+        List<Produk> list = jdbcTemplate.query(query, new RowMapper<Produk>(){
+            @Override
+            public Produk mapRow(ResultSet rs, int i) throws SQLException {
+                return new Produk(
+                        rs.getString("kode_unique"),
+                        rs.getString("kode"), 
+                        rs.getString("nama"),
+                        rs.getBigDecimal("harga"), 
+                        rs.getInt("qty"));
+            }
+        });
+        return list;
+    }
     
 }
