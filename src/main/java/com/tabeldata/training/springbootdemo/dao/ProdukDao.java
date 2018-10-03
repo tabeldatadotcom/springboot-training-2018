@@ -6,12 +6,12 @@
 package com.tabeldata.training.springbootdemo.dao;
 
 import com.tabeldata.training.springbootdemo.entity.Produk;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -27,7 +27,7 @@ public class ProdukDao {
     @Qualifier("dataSource")
     private DataSource datasource;
     
-    public Produk findById(String id){
+    public Produk findById(String id) throws EmptyResultDataAccessException{
         String query = "select id as kode_unique, kode, nama, harga, qty from produk where id = ?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
         Produk produk = jdbcTemplate.queryForObject(query, new RowMapper<Produk>(){

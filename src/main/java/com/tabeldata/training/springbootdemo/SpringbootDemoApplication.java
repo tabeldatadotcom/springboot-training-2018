@@ -10,9 +10,6 @@ import org.springframework.context.ApplicationContext;
 public class SpringbootDemoApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(SpringbootDemoApplication.class, args);
-        ProdukDao bean = context.getBean(ProdukDao.class);
-        Produk produk1 = bean.findById("produk-001");
-        System.out.println(produk1.toString());
+        SpringApplication.run(SpringbootDemoApplication.class, args);
     }
 }
