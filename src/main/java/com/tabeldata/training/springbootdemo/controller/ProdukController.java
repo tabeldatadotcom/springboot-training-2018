@@ -6,8 +6,10 @@
 package com.tabeldata.training.springbootdemo.controller;
 
 import com.tabeldata.training.springbootdemo.dao.ProdukDao;
+import com.tabeldata.training.springbootdemo.dao.ProdukJpaDao;
 import com.tabeldata.training.springbootdemo.entity.Produk;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -29,15 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProdukController {
 
     @Autowired
-    private ProdukDao dao;
+    private ProdukJpaDao dao;
 
     @GetMapping("/{kode}/findById")
     public ResponseEntity<Produk> findById(@PathVariable("kode") String id) {
         try {
-            Produk produk = dao.findById(id);
+            Produk produk = dao.findById(id).get();
             return ResponseEntity.ok(produk);
-
-        } catch (EmptyResultDataAccessException erdae) {
+        } catch (NoSuchElementException erdae) {
             return ResponseEntity.noContent().build();
         }
     }
@@ -55,7 +56,7 @@ public class ProdukController {
     
     @PutMapping("/")
     public ResponseEntity<Produk> update(@RequestBody Produk produk){
-        produk = this.dao.update(produk);
+        produk = this.dao.save(produk);
         return ResponseEntity.ok(produk);
     }
     

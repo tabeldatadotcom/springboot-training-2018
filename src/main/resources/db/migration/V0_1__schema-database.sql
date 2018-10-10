@@ -9,7 +9,7 @@
  */
 
 create table produk(
-    id varchar(255) not null primary key,
+    id varchar(36) not null primary key,
     kode varchar(50) not null unique,
     nama varchar(100) not null,
     harga decimal not null default 0,
