@@ -6,10 +6,14 @@
 package com.tabeldata.training.springbootdemo.dao;
 
 import com.tabeldata.training.springbootdemo.entity.Produk;
+import com.tabeldata.training.springbootdemo.entity.ProdukSpec;
 import com.tabeldata.training.springbootdemo.repository.ProdukRepository;
+import com.tabeldata.training.springbootdemo.repository.ProdukSpekRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -22,11 +26,20 @@ public class ProdukJpaDao {
     @Autowired
     private ProdukRepository repo;
     
+    @Autowired
+    private ProdukSpekRepository repoSpek;
+    
     public List<Produk> findAll(){
         return repo.findAll();
     }
     
+    public Page<Produk> findAllPegination(Pageable page){
+        return repo.findAll(page);
+    }
+    
     public Produk save(Produk produk){
+        ProdukSpec spek = repoSpek.save(produk.getSpek());
+        produk.setSpek(spek);
         return repo.save(produk);
     }
     

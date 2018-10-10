@@ -5,13 +5,13 @@
  */
 package com.tabeldata.training.springbootdemo.controller;
 
-import com.tabeldata.training.springbootdemo.dao.ProdukDao;
 import com.tabeldata.training.springbootdemo.dao.ProdukJpaDao;
 import com.tabeldata.training.springbootdemo.entity.Produk;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +46,11 @@ public class ProdukController {
     @GetMapping("/list")
     public List<Produk> findAll(){
         return dao.findAll();
+    }
+    
+     @GetMapping("/page")
+    public Page<Produk> findAllByPage(Pageable page){
+        return dao.findAllPegination(page);
     }
     
     @PostMapping("/")

@@ -6,6 +6,7 @@
 package com.tabeldata.training.springbootdemo.dao;
 
 import com.tabeldata.training.springbootdemo.entity.Produk;
+import com.tabeldata.training.springbootdemo.entity.ProdukSpec;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,8 @@ public class ProdukDao {
                         rs.getString("kode"),
                         rs.getString("nama"),
                         rs.getBigDecimal("harga"),
-                        rs.getInt("qty"));
+                        rs.getInt("qty"), 
+                        new ProdukSpec());
             }
 
         }, id);
@@ -55,7 +57,8 @@ public class ProdukDao {
                         rs.getString("kode"),
                         rs.getString("nama"),
                         rs.getBigDecimal("harga"),
-                        rs.getInt("qty"));
+                        rs.getInt("qty"),
+                new ProdukSpec());
             }
         });
         return list;
