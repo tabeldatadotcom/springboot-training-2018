@@ -6,11 +6,15 @@
 package com.tabeldata.training.springbootdemo.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -45,5 +49,11 @@ public class Produk {
     @OneToOne
     @JoinColumn(name = "spek_id")
     private ProdukSpec spek;
+    
+    @OneToMany
+    @JoinTable(name = "produk_category", 
+            joinColumns = @JoinColumn(name = "produk_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "categori_id", nullable = false))
+    private List<Kategori> categories = new ArrayList<>();
     
 }

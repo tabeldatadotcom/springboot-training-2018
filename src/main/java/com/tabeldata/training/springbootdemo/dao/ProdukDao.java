@@ -10,6 +10,7 @@ import com.tabeldata.training.springbootdemo.entity.ProdukSpec;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,9 @@ public class ProdukDao {
                         rs.getString("kode"),
                         rs.getString("nama"),
                         rs.getBigDecimal("harga"),
-                        rs.getInt("qty"), 
-                        new ProdukSpec());
+                        rs.getInt("qty"),
+                        new ProdukSpec(),
+                        new ArrayList());
             }
 
         }, id);
@@ -58,7 +60,8 @@ public class ProdukDao {
                         rs.getString("nama"),
                         rs.getBigDecimal("harga"),
                         rs.getInt("qty"),
-                new ProdukSpec());
+                        new ProdukSpec(),
+                        new ArrayList<>());
             }
         });
         return list;
@@ -80,7 +83,7 @@ public class ProdukDao {
         produk.setId(primaryKey);
         return produk;
     }
-    
+
     public Produk update(Produk produk) {
         String query = "update produk set kode = ?, nama = ?, harga = ?, qty = ? where id = ?";
         this.jdbcTemplate.update(query, new PreparedStatementSetter() {
@@ -95,12 +98,12 @@ public class ProdukDao {
         });
         return produk;
     }
-    
-    public void deleteById(String id){
-       String query = "delete from produk where id = ?";
+
+    public void deleteById(String id) {
+        String query = "delete from produk where id = ?";
         this.jdbcTemplate.update(query, new PreparedStatementSetter() {
             @Override
-            public void setValues(PreparedStatement ps) throws SQLException {                
+            public void setValues(PreparedStatement ps) throws SQLException {
                 ps.setString(1, id);
             }
         });
