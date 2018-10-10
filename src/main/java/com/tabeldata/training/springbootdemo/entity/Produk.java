@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -31,6 +32,7 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @Entity
 @Table(name = "produk")
+@ToString(exclude = {"categories"})
 public class Produk {
     
     @Id
@@ -50,10 +52,7 @@ public class Produk {
     @JoinColumn(name = "spek_id")
     private ProdukSpec spek;
     
-    @OneToMany
-    @JoinTable(name = "produk_category", 
-            joinColumns = @JoinColumn(name = "produk_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "categori_id", nullable = false))
+    @OneToMany(mappedBy = "produk")
     private List<Kategori> categories = new ArrayList<>();
     
 }

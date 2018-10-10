@@ -46,13 +46,14 @@ public class ProdukJpaDao {
     public Produk save(Produk produk){
         ProdukSpec spek = repoSpek.save(produk.getSpek());
         produk.setSpek(spek);
-        Iterable<Kategori> categories = repoKategori.saveAll(produk.getCategories());
-        List<Kategori> listCategories = new ArrayList<>();
-        categories.forEach(data -> {
-            listCategories.add(data);
-        });
-        produk.setCategories(listCategories);
-        return repo.save(produk);
+        
+        List<Kategori> categories = produk.getCategories();
+        produk = repo.save(produk);
+        for(Kategori k : categories){
+            k.setProduk(produk);
+        }
+        repoKategori.saveAll(categories);
+        return produk;
     }
     
     public Optional<Produk> findById(String id){

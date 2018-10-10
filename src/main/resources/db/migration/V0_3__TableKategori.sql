@@ -11,7 +11,8 @@
 create table categories(
     id varchar(36) not null primary key,
     nama varchar(150) not null,
-    description longtext
+    description longtext,
+    produk_id varchar(36)
 )engine = InnoDB;
 
 create table produk_category(

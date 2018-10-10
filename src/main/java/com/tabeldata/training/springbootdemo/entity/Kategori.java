@@ -5,10 +5,16 @@
  */
 package com.tabeldata.training.springbootdemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,4 +40,9 @@ public class Kategori {
     @Lob
     private String description;
     
+    @ManyToOne
+    @JoinColumn(name = "produk_id", nullable = false)
+    @JsonIgnore
+    private Produk produk;
+   
 }
