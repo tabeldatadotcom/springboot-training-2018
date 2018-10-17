@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>List produk</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <td>No</td>  
+                    <td>Kode</td>
+                    <td>Nama</td>
+                    <td>harga</td>                    
+                    <td>QTY</td>
+                    <td>Description</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p,iter : ${products}">
+                    <td th:text="${iter.count}">No</td>  
+                    <td th:text="${p.kode}">Kode</td>
+                    <td th:text="${p.nama}">Nama</td>
+                    <td th:text="${p.harga}">harga</td>                    
+                    <td th:text="${p.qty}">QTY</td>
+                    <div th:switch="${p.spek == null}">
+                        <td th:case="true"></td>
+                        <td th:case="false" th:text="${p.spek.description}">Description</td>
+                    </div>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
