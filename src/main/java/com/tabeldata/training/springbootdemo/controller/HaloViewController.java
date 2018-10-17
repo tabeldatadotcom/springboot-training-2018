@@ -8,6 +8,8 @@ package com.tabeldata.training.springbootdemo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -17,8 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HaloViewController {
     
     @GetMapping("/halo")
-    public String halo(){
-        return "home";
+    public ModelAndView halo(
+            ModelAndView view,
+            @RequestParam(name = "nama", required = false) String nama){
+        view.setViewName("home");
+        view.addObject("namaLengkap", nama);
+        return view;
     }
     
 }
