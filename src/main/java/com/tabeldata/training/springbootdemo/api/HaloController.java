@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tabeldata.training.springbootdemo.controller;
+package com.tabeldata.training.springbootdemo.api;
 
 import com.tabeldata.training.springbootdemo.dto.RequestHalo;
 import com.tabeldata.training.springbootdemo.dto.ResponseHalo;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dimasm93
  */
 @RestController
-@RequestMapping("/halo")
+@RequestMapping("/api/halo")
 public class HaloController {
     
     @GetMapping(

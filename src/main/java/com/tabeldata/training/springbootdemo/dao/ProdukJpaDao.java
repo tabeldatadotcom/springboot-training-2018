@@ -11,7 +11,6 @@ import com.tabeldata.training.springbootdemo.entity.ProdukSpec;
 import com.tabeldata.training.springbootdemo.repository.KategoriRepository;
 import com.tabeldata.training.springbootdemo.repository.ProdukRepository;
 import com.tabeldata.training.springbootdemo.repository.ProdukSpekRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

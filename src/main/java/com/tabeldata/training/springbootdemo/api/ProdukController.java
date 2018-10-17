@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tabeldata.training.springbootdemo.controller;
+package com.tabeldata.training.springbootdemo.api;
 
 import com.tabeldata.training.springbootdemo.dao.ProdukJpaDao;
 import com.tabeldata.training.springbootdemo.entity.Produk;
